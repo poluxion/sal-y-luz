@@ -1,0 +1,13 @@
+body 
+{
+	background-image: url(../img/imagensalyluz.jpg);
+}
+
+div.card-group{
+	width: 400px;
+	margin: auto;
+}
+center{
+	margin-bottom: 15px;
+	margin-top: -10px;
+}

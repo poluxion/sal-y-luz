@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Corporacion Sal y luz</title>
+    <link rel="stylesheet" href="../resources/fontawesome-5.5/css/all.min.css" />
+    <link rel="stylesheet" href="../resources/slick/slick.css"/>
+    <link rel="stylesheet" href="../resources/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="../resources/magnific-popup/magnific-popup.css"/>
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../resources/css/templatemo-style.css" />
+  </head>
+  <body>    
+  
+    <section id="hero" class="text-white tm-font-big tm-parallax">
+      <nav class="navbar navbar-expand-md tm-navbar" id="tmNav">
+        <div class="container">                   
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars navbar-toggler-icon"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#introduction">Quienes somos?</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#work">Nuestros eventos</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#contact">Contactanos!</a>
+              </li> 
+              <% if (inicioSesion && rol_user === "Admin"){ %>
+                  <li class="nav-item">
+                    <a class="nav-link tm-nav-link" href="eventos">Registro <p>Eventos</p></a> 
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link tm-nav-link" href="list">Lista <p>Eventos</p></a> 
+                  </li>
+                  <% } %>
+               <% if (inicioSesion && rol_user === "Usuario" || rol_user === "Admin" || rol_user === "Asistente"){ %>
+                <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="logout" class="a-logout">Logout</a>                 
+                <p>
+                <h4 class="userLogin"><%= name_user%> - <p> <%= rol_user%> </p> </h4>
+                </p>
+                </div>
+                <% } else { %>
+                <li class="nav-item">
+                <a class="nav-link tm-nav-link" href="areaRegistro">Registrate aquí</a>
+                <li class="nav-item">
+                <a href="./inicioSesion" class="nav-link tm-nav-link">Inicia sesión aquí</a>
+                 <% } %>
+                  </li>
+            </ul>
+          </div>        
+        </div>
+      </nav>
+      
+      <div class="text-center tm-hero-text-container">
+        <div class="tm-hero-text-container-inner">
+            <h2 class="tm-hero-title">Corporacion Sal y Luz</h2>
+            <p class="tm-hero-subtitle">
+              Centro de cultura
+              <br />San javier, la America
+            </p>
+        </div>        
+      </div>    
+    </section>
+    <section id="introduction" class="tm-section-pad-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="../resources/img/imagensalyluz.jpg" alt="Image" class="img-fluid tm-intro-img" />
+          </div>
+          <div class="col-lg-6">
+            <div class="tm-intro-text-container">
+                <h2 class="tm-text-primary mb-4 tm-section-title">Quienes somos?</h2>
+                <p class="mb-4 tm-intro-text">
+                  Con más de 30 años de experiencia en proyectos de promoción social de diversa índole temática, en procesos de prevención a la emergencia del delito, prevención a las drogas y mecanismos pacíficos de reconciliación en la comuna 13.
+              </p>
+                <p class="mb-5 tm-intro-text">
+                  Aprende más sobre nosotros en nuestro <a href="nofollow" href="https://www.facebook.com/Corporaci%C3%B3n-Sal-y-Luz-107960750690972/?ref=page_internal"></a>
+                  <a rel="nofollow" href="https://www.facebook.com/Corporaci%C3%B3n-Sal-y-Luz-107960750690972/?ref=page_internal">Facebook.</a>
+            </div>
+          </div>
+        </div>
+        <div class="row tm-section-pad-top">
+          <div class="col-lg-4">
+            <h4 class="text-center tm-text-primary mb-4">Somos</h4>
+            <p>
+              Una fundación sin animo de lucro que busca la paz y convivencia sana entre comunidades de la zona haciendo eventos recreativos o informativos.
+            </p>
+          </div>
+        
+        <div class="col-lg-4 mt-5 mt-lg-0">
+          <h4 class="text-center tm-text-primary mb-4">Buscamos</h4>
+          <p>
+            Mejorar la calidad de vida de jovenes y adultos de la comuna 13 con proyectos de prevencion de violencia y drogas, y buscamos promover emprendimientos empresariales y familiares.
+          </p>
+        </div>
+        <div class="col-lg-4 mt-5 mt-lg-0">
+          <h4 class="text-center tm-text-primary mb-4">Tenemos</h4>
+          <p>
+            Más de 20 años siendo Sal para dar sabor y Luz para Iluminar el mundo y serán muchos más, muchas gracias a nuestra razón de ser "La Comunidad" por creer... a las organizaciones, colectivos y líderes aliados nuestros， muchas gracias por sumarse a transformar con nosotros.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="work" class="tm-section-pad-top">
+      <div class="container tm-container-gallery">
+        <div class="row">
+          <div class="text-center col-12">
+              <h2 class="tm-text-primary tm-section-title mb-4">Nuestros eventos!</h2>
+              <p class="mx-auto tm-work-description">
+                Eventos de promocion social de diversa indole tematica!
+                
+              </p>
+          </div>            
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="mx-auto tm-gallery-container">
+                    <div class="grid tm-gallery">
+                      <a href="/contemos">
+                        <figure class="effect-honey tm-gallery-item">
+                          <img src="../resources/img/radio.jpg" alt="Image" class="img-fluid">
+                          <figcaption>
+                            <h2><i>CONT<span>EMOS LA 13</span></i></h2>
+                          </figcaption>
+                        </figure>
+                      </a>
+                      <a href="economica">
+                        <figure class="effect-honey tm-gallery-item">
+                          <img src="../resources/img/dinero.jpg" alt="Image" class="img-fluid">
+                          <figcaption>
+                            <h2><i>Autonomía <span>Economíca</span> </i></h2>
+                          </figcaption>
+                        </figure>
+                      </a>
+                      <a href="lideres" name="escri" id="escri">
+                        <figure class="effect-honey tm-gallery-item">
+                          <img src="../resources/img/lider.jpg" alt="Image" class="img-fluid">
+                          <figcaption>
+                            <h2><i>Red de Lid<span>eres Escolares</span> </i></h2>
+                          </figcaption>
+                        </figure>
+                      </a>
+                      <a href="semillero">
+                        <figure class="effect-honey tm-gallery-item">
+                          <img src="../resources/img/limpiar.jpg" alt="Image" class="img-fluid">
+                          <figcaption>
+                            <h2><i>Semillero de im<span>pacto social</span></i></h2>
+                          </figcaption>
+                        </figure>
+                      </a>
+                      <a href="participacion">
+                        <figure class="effect-honey tm-gallery-item">
+                          <img src="../resources/img/ninos.jpg" alt="Image" class="img-fluid">
+                          <figcaption>
+                            <h2><i>Labs. Infantiles d<span>e participación</span></i></h2>
+                          </figcaption>
+                        </figure>
+                      </a>
+                      <a href="vida">
+                        <figure class="effect-honey tm-gallery-item">
+                          <img src="../resources/img/festival.jpg" alt="Image" class="img-fluid">
+                          <figcaption>
+                            <h2><i>Festival Fie<span>sta a la vida</span></i></h2>
+                          </figcaption>
+                        </figure>
+                      </a>
+                      <a href="/padres">
+                        <figure class="effect-honey tm-gallery-item">
+                          <img src="../resources/img/virtual.jpg" alt="Image" class="img-fluid">
+                          <figcaption>
+                            <h2><i>Escuela Virt<span>ual de padres</span></i></h2>
+                          </figcaption>
+                        </figure>
+                      </a>                      
+                    </div>
+                </div>                
+            </div>        
+          </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="tm-section-pad-top tm-parallax-2">
+      <div class="container tm-container-contact">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-4 tm-section-title">Contactanos!</h2>
+                <div class="mb-5 tm-underline">
+                  <div class="tm-underline-inner"></div>
+                </div>
+                <p class="mb-5">
+                  Para facilitarles el contacto con nosotros hemos habilitado nuestro <a href="https://www.facebook.com/Corporaci%C3%B3n-Sal-y-Luz-107960750690972">Facebook</a> 
+                </p>
+            </div>
+            
+            <div class="col-sm-12 col-md-6 d-flex align-items-center tm-contact-item">
+              <a href="tel:0100200340" class="tm-contact-item-link">
+                  <i class="fas fa-3x fa-phone mr-4"></i>
+                  <span class="mb-0">322 5056638</span>
+              </a>              
+            </div>
+            <div class="col-sm-12 col-md-6 d-flex align-items-center tm-contact-item">
+              <a href="mailto:salyluzcorp@yahoo.com" class="tm-contact-item-link">
+                  <i class="fas fa-3x fa-envelope mr-4"></i>
+                  <span class="mb-0">salyluzcorp@yahoo.com</span>
+              </a>              
+            </div>
+            <div class="col-sm-12 col-md-6 d-flex align-items-center tm-contact-item">
+              <a href="https://www.google.com/maps/dir/?api=1&destination=6.2578094%2C-75.6147816&fbclid=IwAR1dWLm8ZQNP0ytVz-aNOjGSMNZppzquA5rO-FwDUoOlgh1tcE0QiYuZGNM" class="tm-contact-item-link">
+                  <i class="fas fa-3x fa-map-marker-alt mr-4"></i>
+                  <span class="mb-0">Nos puedes encontrar aquí!</span>
+              </a>              
+            </div>
+            <div class="col-sm-12 col-md-6 d-flex align-items-center tm-contact-item">
+            </div>
+        </div>
+      </div>
+      <footer class="text-center small tm-footer">
+          <p class="mb-0">
+            Copyright &copy; 2021 Corporación Sal y luz 
+          </p>
+        </footer>
+    </section>
+    <script src="./resources/jquery-1.9.1.min.js"></script>
+    <script src="./resources/slick/slick.min.js"></script>
+    <script src="./resources/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="./jquery.singlePageNav.min.js"></script>     
+    <script src="./resources/bootstrap.min.js"></script> 
+    <script>
+
+      function getOffSet(){
+        var _offset = 450;
+        var windowHeight = window.innerHeight;
+
+        if(windowHeight > 500) {
+          _offset = 400;
+        } 
+        if(windowHeight > 680) {
+          _offset = 300
+        }
+        if(windowHeight > 830) {
+          _offset = 210;
+        }
+
+        return _offset;
+      }
+
+      function setParallaxPosition($doc, multiplier, $object){
+        var offset = getOffSet();
+        var from_top = $doc.scrollTop(),
+          bg_css = 'center ' +(multiplier * from_top - offset) + 'px';
+        $object.css({"background-position" : bg_css });
+      }
+
+      // Parallax function
+      // Adapted based on https://codepen.io/roborich/pen/wpAsm        
+      var background_image_parallax = function($object, multiplier, forceSet){
+        multiplier = typeof multiplier !== 'undefined' ? multiplier : 0.5;
+        multiplier = 1 - multiplier;
+        var $doc = $(document);
+        // $object.css({"background-attatchment" : "fixed"});
+
+        if(forceSet) {
+          setParallaxPosition($doc, multiplier, $object);
+        } else {
+          $(window).scroll(function(){          
+            setParallaxPosition($doc, multiplier, $object);
+          });
+        }
+      };
+
+      var background_image_parallax_2 = function($object, multiplier){
+        multiplier = typeof multiplier !== 'undefined' ? multiplier : 0.5;
+        multiplier = 1 - multiplier;
+        var $doc = $(document);
+        $object.css({"background-attachment" : "fixed"});
+        $(window).scroll(function(){
+          var firstTop = $object.offset().top,
+              pos = $(window).scrollTop(),
+              yPos = Math.round((multiplier * (firstTop - pos)) - 186);              
+
+          var bg_css = 'center ' + yPos + 'px';
+
+          $object.css({"background-position" : bg_css });
+        });
+      };
+      
+      $(function(){
+        // Hero Section - Background Parallax
+        background_image_parallax($(".tm-parallax"), 0.30, false);
+        background_image_parallax_2($("#contact"), 0.80);   
+        
+        // Handle window resize
+        window.addEventListener('resize', function(){
+          background_image_parallax($(".tm-parallax"), 0.30, true);
+        }, true);
+
+        // Detect window scroll and update navbar
+        $(window).scroll(function(e){          
+          if($(document).scrollTop() > 120) {
+            $('.tm-navbar').addClass("scroll");
+          } else {
+            $('.tm-navbar').removeClass("scroll");
+          }
+        });
+        
+        // Close mobile menu after click 
+        $('#tmNav a').on('click', function(){
+          $('.navbar-collapse').removeClass('show'); 
+        })
+
+        // Scroll to corresponding section with animation
+        $('#tmNav').singlePageNav();        
+        
+        // Add smooth scrolling to all links
+        // https://www.w3schools.com/howto/howto_css_smooth_scroll.asp
+        $("a").on('click', function(event) {
+          if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+
+            $('html, body').animate({
+              scrollTop: $(hash).offset().top
+            }, 400, function(){
+              window.location.hash = hash;
+            });
+          } // End if
+        });
+
+        // Pop up
+        $('.tm-gallery').magnificPopup({
+          delegate: 'a',
+          type: 'image',
+          gallery: { enabled: true }
+        });
+
+        // Gallery
+        $('.tm-gallery').slick({
+          dots: true,
+          infinite: false,
+          slidesToShow: 5,
+          slidesToScroll: 2,
+          responsive: [
+          {
+            breakpoint: 1199,
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 991,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 767,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+        });
+      });
+    </script>
+  </body>
+</html>

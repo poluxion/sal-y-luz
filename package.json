@@ -1,0 +1,27 @@
+{
+  "name": "SalYLuz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "areaRegistro.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "npx jasmine"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^9.0.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "middlewares": "^0.1.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "jasmine": "^3.8.0",
+    "supertest": "^6.1.3"
+  }
+}

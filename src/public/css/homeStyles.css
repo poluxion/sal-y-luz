@@ -1,0 +1,18 @@
+div.info-gene
+{
+	margin: left;
+	padding: 70px 5px 1px 70px;
+	width: 500px;
+}
+div.gene-info
+{
+	
+	padding: 70px 5px 1px 70px;
+	width: 500px;
+}
+body
+{
+	background: url("../imagensalyluz.jpg");
+	margin: auto;
+}
+
