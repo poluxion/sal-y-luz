@@ -1,4 +1,1 @@
-DB_HOST = us-cdbr-east-04.cleardb.com
-DB_USER = b58be2487761ea
-DB_PASSWORD = b2fe26fe
-DB_DATABASE = heroku_0124097ebb4b235
+mysql://b58be2487761ea:b2fe26fe@us-cdbr-east-04.cleardb.com/heroku_0124097ebb4b235?reconnect=true

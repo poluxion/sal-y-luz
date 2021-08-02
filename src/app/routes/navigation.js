@@ -3,7 +3,7 @@ const bcryptjs = require('bcryptjs');
 
 
 module.exports = app => {
-	app.get('/', (req,res)=> {
+	app.get('/index', (req,res)=> {
 		if (req.session.loggedin) {
 			res.render('../views/index.ejs', {
 				inicioSesion:true,
