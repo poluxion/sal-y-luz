@@ -1,18 +1,20 @@
 const mysql= require('mysql');
 
-const connection = mysql.createConnection({
+const conexion_bd = {
 	host: "us-cdbr-east-04.cleardb.com",
 	user: "b58be2487761ea",
 	database: "heroku_0124097ebb4b235",
 	password: "b2fe26fe"
-});
+};
 
 function handleDisconnect(conexion_bd){
 	connection = mysql.createPool(conexion_bd);
 
-	connection.getConnection(function(err){
+
+	connection.getConnection(function(err) {
 		if (err){
-			console.log('error al conectar a la bd: ',err)
+			console.log('error al conectar a la bd: ',err);
+			setTimeout(handleDisconnect, 2000);
 		}
 	});
 
@@ -27,5 +29,4 @@ function handleDisconnect(conexion_bd){
 }
 
 handleDisconnect(conexion_bd);
-
 module.exports = connection;
