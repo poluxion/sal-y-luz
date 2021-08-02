@@ -195,7 +195,7 @@ module.exports = app => {
 				});
 			} else if (cedula) {
 				connection.query('SELECT * FROM asistencia WHERE cedula = ?',)
-					if (results[0].cedula === cedula) {
+					if (results.length === 0) {
 						res.render('../views/contemos.ejs',{
 							inicioSesion:false,
 							evento:result,
