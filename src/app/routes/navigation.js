@@ -179,7 +179,7 @@ module.exports = app => {
 			nombreEvento,
 			nombrePersona,
 			asistencia
-		}, (error,result,rep) => {
+		}, (error,result) => {
 			if(error){
 				res.render('../views/contemos.ejs',{
 					inicioSesion:false,
@@ -194,8 +194,8 @@ module.exports = app => {
 					ruta:''
 				});
 			} else if (cedula) {
-				connection.query('SELECT * FROM asistencia WHERE cedula = ?',)
-					if (result.length === 0) {
+				connection.query('SELECT * FROM asistencia WHERE cedula = ?',[cedula],(err,results)=> {
+					if (results.length === 0) {
 						res.render('../views/contemos.ejs',{
 							inicioSesion:false,
 							evento:result,
@@ -209,6 +209,7 @@ module.exports = app => {
 							ruta:''
 						})				
 					}
+				})
 				
 			} else {
 				res.render('../views/contemos.ejs', {
