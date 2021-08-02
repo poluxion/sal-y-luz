@@ -14,7 +14,7 @@ app.set('views', path.join(__dirname,'../app/views'));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
-dotenv.config({path: path.join(__dirname,'../env/.env')})
+dotenv.config({path: path.join(__dirname,'../env/.envH')})
 
 app.use('/resources', express.static(path.join(__dirname,'../public')));
 
