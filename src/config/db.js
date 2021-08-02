@@ -7,13 +7,25 @@ const connection = mysql.createConnection({
 	password: "b2fe26fe"
 });
 
-connection.connect((err)=>
-{
-	if (err) 
-	{
-		console.log("El error de conexion bd es: "+err)
-		return;
-	}
-	console.log("Conectado exitosamente a la BD");
-});
+function handleDisconnect(conexion_bd){
+	connection = mysql.createPool(conexion_bd);
+
+	connection.getConnection(function(err){
+		if (err){
+			console.log('error al conectar a la bd: ',err)
+		}
+	});
+
+	connection.on('error', function(err){
+		console.log('db error', err);
+		if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+			handleDisconnect();
+		}else{
+			throw err;
+		}
+	});
+}
+
+handleDisconnect(conexion_bd);
+
 module.exports = connection;
