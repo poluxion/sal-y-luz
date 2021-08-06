@@ -23,7 +23,6 @@ module.exports = app => {
 	app.post('/auth', async (req, res)=> {
 		const {cedula,pessw} = req.body;
 		let passwordHaash = await bcryptjs.hash(pessw, 8);
-
 		if (cedula && pessw){
 			connection.query('SELECT * FROM persona WHERE Cedula = ?',[cedula], async(err, results) => {
 			console.log(results);
@@ -102,16 +101,20 @@ module.exports = app => {
 		})
 	})
 	app.get("/contemos", (req,res)=>{
-		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Laboratorios de comunicaciones - CONTEMOS LA 13' ", (err,result)=>{
+		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Laboratorios de comunicaciones - CONTEMOS LA 13' ",
+		 (err,result)=>{
 			res.render('../views/contemos.ejs', {
 				evento:result,
 				inicioSesion:true,
-				rol_user: req.session.Rol
+				rol_user: req.session.Rol,
+				cedula:req.session.Cedula,
+				eve:req.params.idEvento
 			})
 		});
 	})
 	app.get("/economica", (req,res)=>{
-		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Autonomía económica' ", (err,result)=>{
+		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Autonomía económica' ",
+		 (err,result)=>{
 			res.render('../views/economica.ejs', {
 				evento:result,
 				inicioSesion:true,
@@ -120,7 +123,8 @@ module.exports = app => {
 		});
 	})
 	app.get("/lideres", (req,res)=>{
-		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Red de Lideres Escolares' ", (err,result)=>{
+		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Red de Lideres Escolares' ", 
+			(err,result)=>{
 			res.render('../views/lideres.ejs', {
 				evento:result,
 				inicioSesion:true,
@@ -129,7 +133,8 @@ module.exports = app => {
 		});
 	})	
 	app.get("/semillero", (req,res)=>{
-		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Semillero de Impacto Social' ", (err,result)=>{
+		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Semillero de Impacto Social' ", 
+			(err,result)=>{
 			res.render('../views/semillero.ejs', {
 				evento:result,
 				inicioSesion:true,
@@ -138,7 +143,8 @@ module.exports = app => {
 		});
 	})	
 	app.get("/participacion", (req,res)=>{
-		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Laboratorios infantiles de Participación' ", (err,result)=>{
+		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Laboratorios infantiles de Participación' ", 
+			(err,result)=>{
 			res.render('../views/participacion.ejs', {
 				evento:result,
 				inicioSesion:true,
@@ -148,7 +154,8 @@ module.exports = app => {
 	})
 
 	app.get("/vida", (req,res)=>{
-		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Festival de fiesta a la vida' ", (err,result)=>{
+		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Festival de fiesta a la vida' ", 
+			(err,result)=>{
 			res.render('../views/vida.ejs', {
 				evento:result,
 				inicioSesion:true,
@@ -158,7 +165,8 @@ module.exports = app => {
 	})
 
 	app.get("/padres", (req,res)=>{
-		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Escuela Virtual de Padres' ", (err,result)=>{
+		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Escuela Virtual de Padres' ", 
+			(err,result)=>{
 			res.render('../views/padres.ejs', {
 				evento:result,
 				inicioSesion:true,
@@ -167,17 +175,84 @@ module.exports = app => {
 		});
 	})
 
+
 	app.get("/registroEvento/:evento/:id", (req,res)=>{
 		let idEvento = req.params.id;
 		let cedula = req.session.Cedula;
-		let nombrePersona = req.session.Nombre;
+		let asistencia = 0;
 		let nombreEvento = req.params.evento;
+		const {ced} = req.body;
+
+		if (cedula && idEvento) {
+			connection.query('SELECT * FROM asistencia WHERE cedula = ? AND idEvento = ?'
+				,[cedula,idEvento],(error,results)=> {
+				if (results.length > 0 || results.idEvento === idEvento) {
+					res.render('../views/eventos.ejs', { 
+						inicioSesion:false,
+						evento:results,
+						rol_user:req.session.Rol,
+						alert:true,
+						alertTitle:"Error",
+						alertMessage:"Error al registrar al evento/Ya estas checkeado",
+						alertIcon: "error",
+						showConfirmButton: true,
+						timer: 3000,
+						ruta: ''
+					});	
+				} else {
+				connection.query('INSERT INTO asistencia SET ?', {
+				idEvento,
+				cedula,
+				asistencia,
+				nombreEvento
+				}, (err,resu) => {
+					if(err) {
+					res.render('../views/contemos.ejs',{
+					inicioSesion:true,
+					evento:resu,
+					cedula:req.session.Cedula,
+					rol_user:req.session.Rol,
+					alert:true,
+					alertTitle:"Error al registrar al evento",
+					alertMessage :"Imposible registrar",
+					alertIcon :"error",
+					showConfirmButton:false,
+					timer:3000,
+					ruta:''
+					});
+					} else {
+						res.render('../views/contemos.ejs', {
+						inicioSesion:true,
+						evento:resu,
+						cedula:req.session.Cedula,
+						rol_user:req.session.Rol,
+						alert:true,
+						alertTitle:"Registration",
+						alertMessage :"Successful Registration",
+						alertIcon :"success",
+						showConfirmButton:false,
+						timer:3000,
+						ruta:''
+						});
+				}
+			})
+		}
+		})
+	} 
+})
+
+			
+
+
+//////////
+
+/*	app.get("/registroEvento/:evento/:id", (req,res)=>{
+		let idEvento = req.params.id;
+		let cedula = req.session.Cedula;
 		let asistencia = 0;
 		connection.query("INSERT INTO asistencia SET ?",{
 			idEvento,
 			cedula,
-			nombreEvento,
-			nombrePersona,
 			asistencia
 		}, (error,result) => {
 			if(error){
@@ -193,13 +268,14 @@ module.exports = app => {
 					timer:3000,
 					ruta:''
 				});
-			} else if (cedula) {
-				connection.query('SELECT * FROM asistencia WHERE cedula = ?',[cedula],(err,results)=> {
-					if (results.length === 0) {
+			
+			} else if (cedula && idEvento) {
+				connection.query('SELECT * FROM asistencia WHERE cedula = ? AND idEvento = ?',[cedula,idEvento],(err,results)=> {
+					if (results.cedula === cedula && results.idEvento === idEvento) {
 						res.render('../views/contemos.ejs',{
 							inicioSesion:false,
 							evento:result,
-							cedula:req.session.Cedula,
+							rol_user:req.session.Rol,
 							alert:true,
 							alertTitle:"Error al registrar al evento",
 							alertMessage :"Imposible registrar/Usuario repetido",
@@ -207,11 +283,11 @@ module.exports = app => {
 							showConfirmButton:false,
 							timer:3000,
 							ruta:''
-						})				
+						});
 					}
 				})
-				
-			} else {
+							
+					} else {
 				res.render('../views/contemos.ejs', {
 					inicioSesion:true,
 					evento:result,
@@ -227,6 +303,7 @@ module.exports = app => {
 			}
 		})
 	})
+	*/
 
 	app.get('/inicioSesion', (req,res)=> {
 		res.render('../views/inicioSesion.ejs');
@@ -286,19 +363,16 @@ module.exports = app => {
 	})
 
 	app.post('/eventos',async(req,res)=>{
-		const {event_name, iniDate, finDate, iniTime, finTime,cupos} = req.body;		
+		const {event_name, iniDate, finDate, iniTime, finTime} = req.body;		
 		console.log(req.body);
-
 		connection.query("INSERT INTO evento SET ?", {
 			nombreEvento:event_name,
 			fechaEventoIni: iniDate,
 			fechaEventoFin:finDate,
 			horaIni:iniTime,
-			horaFin:finTime,
-			cupos:cupos
+			horaFin:finTime			
 		}, async(error,result)=>{
 			if (error) {
-
 				res.render('../views/eventos.ejs', {
 					inicioSesion:false,
 					alert: true,
@@ -371,54 +445,40 @@ module.exports = app => {
 		})
 	})
 
-	app.post('/registroAsistencia',  (req, res)=> {
-		const {cedula,idEvento} = req.body;
-
+	app.post('/registroAsistencia', (req, res)=> {
+		const {cedula,idEvento,selEvento} = req.body;
 		if (cedula && idEvento){
 			connection.query('SELECT * FROM asistencia WHERE cedula = ? AND idEvento = ?',[cedula,idEvento], (err,result) => {
-				if (result.length === 0 && result.idEvento === 0){ 
+				if (result.cedula === cedula && result.idEvento === idEvento && result.asistencia === "1"){ 
 					res.render('../views/asistencia.ejs', { 
 						inicioSesion:true,
 						asistente:result,
 						rol_user:req.session.Rol,
 						alert:true,
 						alertTitle:"Error",
-						alertMessage:"Error al registrar al evento/Ya estas registrado",
+						alertMessage:"Error al registrar al evento/Ya estas checkeado",
 						alertIcon: "error",
 						showConfirmButton: true,
 						timer: 3000,
 						ruta: 'asistencia'
 					});					
-				} else if (result.cedula === cedula || result.asistencia === "1") {
-							res.render('../views/asistencia.ejs', { 
-							inicioSesion:true,
-							asistente:result,
-							rol_user:req.session.Rol,
-							alert:true,
-							alertTitle:"Error",
-							alertMessage:"Error al registrar al evento/Ya estas registrado",
-							alertIcon:"error",
-							showConfirmButton:true,
-							timer:3000,
-							ruta:'asistencia'
-							});
-						} else {
-								connection.query('UPDATE asistencia SET asistencia = 1 WHERE cedula = ? AND idEvento = ? AND asistencia = 0',[cedula,idEvento], (err,results) => {
-								res.render('../views/asistencia.ejs', {
-								inicioSesion:true,
-								asistente:result,
-								rol_user:req.session.Rol,
-								alert:true,
-								alertTitle:"Asistente verficado!",
-								alertMessage:"Registro exitoso!",
-								alertIcon: "success",
-								showConfirmButton: false,
-								timer: 3000,
-								ruta: 'asistencia'
-						})
-					});			
-				}
-			})	
-		}			
-	})
+				} else {
+						connection.query('UPDATE asistencia SET asistencia = 1 WHERE cedula = ? AND idEvento = ?',[cedula,idEvento], (err,results) => {
+						res.render('../views/asistencia.ejs', {
+						inicioSesion:true,
+						asistente:result,
+						rol_user:req.session.Rol,
+						alert:true,
+						alertTitle:"Asistente verificado!",
+						alertMessage:"Registro exitoso!",
+						alertIcon: "success",
+						showConfirmButton: false,
+						timer: 3000,
+						ruta: 'asistencia'
+					})
+				});			
+			}
+		})	
+	}			
+})
 }

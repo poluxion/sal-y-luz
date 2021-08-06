@@ -8,7 +8,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body class="contemosla13">	
-	<form name="registroAsistencia" action="registroAsistencia" method="POST" onsubmit="change()">
+	<form id="registroAsistencia" name="registroAsistencia" action="registroAsistencia" method="POST" onsubmit="change()">
 	<center>
 	<h1 class="tituloLAB">ASISTENCIA DE ACTIVIDADES</h1>
 	</center>
@@ -17,13 +17,18 @@
 			<div class="card-group1">
 				<div class="card text-center1">
 					<div class="card-body1">
-						<select class="form-select" id="idEvento" name="idEvento" 
-						onsubmit="change()">
+						<select class="form-select" id="selEvento" name="selEvento" 
+						onchange="mostrarEvento()">
+						<option>Selecciona un evento</option>
 						<% for (let i = 0; i < asistente.length; i++) { %>
-						  <option  
-						  value=" <%= asistente[i].idEvento %> "> <%= asistente[i].nombreEvento %> - ID: <%= asistente[i].idEvento %> </option>
+						  <option
+						  value="<%= asistente[i].idEvento %>"> <%= asistente[i].nombreEvento %> - ID: <%= asistente[i].idEvento%> 
+						</option>
 						 <% } %>
 						 </select>
+		 
+						 <input type="text" id="idEvento" name="idEvento" hidden>
+
 						 	<div name="asisCedula" class="asisCedula">
 						 		<input type="text" placeholder="Ingresa tu cedula" id="cedula" name="cedula" required>
 						 	</div>
@@ -33,8 +38,8 @@
 		</div>		
 	</div>  		
 						<center>
-						<button class="btn-save" type="submit">REGISTRO </button>
-						</a>
+						<button class="btn-save" type="submit" >REGISTRO </button>
+						<button class="btn-register"><a href="logout" class="btn-register">LOGOUT</a></button>
 					  	</center>
 					  	
 					  	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -55,10 +60,17 @@
 	<% } %>
 
 	<script>
-		function change() {
-		  var selectedValue = idEvento.options[idEvento.selectedIndex].text;
-		}
+		
 	</script>
+
+	<script type="text/javascript">
+function mostrarEvento() {
+  var selEvento = document.getElementById("selEvento"),
+     idEvento = document.getElementById("idEvento");
+
+  idEvento.value = selEvento.value;
+}
+</script>
 
 	</form>
 </body>

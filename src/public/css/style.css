@@ -49,6 +49,13 @@ body.contemosla13
 	font-weight: 600;
 	border-radius: 5px;
 }
+.btn-secondary1{
+	text-decoration: none;
+	background-color: gray;
+	font-weight: 600;
+	border-radius: 5px;
+	color: black;
+}
 
 .btn-register{
 	text-decoration: none;
