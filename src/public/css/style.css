@@ -87,6 +87,7 @@ div
 
 div.card-body1{
 	background-color: white;
+	box-shadow:0 0 0 3px rgba(121,82,179,0.25);
 }
 p.describe{
 	font-size: x-large;
