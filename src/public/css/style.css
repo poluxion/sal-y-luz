@@ -16,6 +16,7 @@ body.contemosla13
 	padding: 0 20px 20px 20px;
 	border: 3px solid white;
 	background-position: center;
+	box-shadow:0 0 0 6px rgba(121,82,179,0.25);
 	
 }
 
@@ -35,7 +36,22 @@ body.contemosla13
 	text-decoration: none;
 	color: black;
 	font-weight: 600;
-	border-radius: 5px
+	border-radius: 5px;
+}
+
+button.btn-success {
+	border-radius: 5px;
+    color: black;
+    text-decoration: none;
+    background-color: #198754;
+    border-color: #198754;
+}
+a.btn-success {
+	border-radius: 5px;
+    color: black;
+    text-decoration: none;
+    background-color: #198754;
+    border-color: #198754;
 }
 
 .btn-save{
@@ -87,7 +103,6 @@ div
 
 div.card-body1{
 	background-color: white;
-	box-shadow:0 0 0 3px rgba(121,82,179,0.25);
 }
 p.describe{
 	font-size: x-large;

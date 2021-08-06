@@ -34,29 +34,26 @@
 </select>
 </div>
 	<div class="mb-3">
-  <label for="formGroupExampleInput2" class="form-label">Fecha incial: </label>
+  <label for="formGroupExampleInput2" class="form-label">Fecha inicial: </label>
   <input type="date" class="form-control" id="iniDate" name="iniDate" required>
 </div>
 	<div class="mb-3">
   <label for="formGroupExampleInput2" class="form-label">Fecha final: </label>
   <input type="date" class="form-control" id="finDate" name="finDate" required>
   <div class="mb-3">
-  <label for="formGroupExampleInput2" class="form-label">Hora incial: </label>
+  <label for="formGroupExampleInput2" class="form-label">Hora inicial: </label>
   <input type="time" class="form-control" id="iniTime" value="<%= evento[i].horaIni %>" name="iniTime" required>
 </div>
 <div class="mb-3">
-  <label for="formGroupExampleInput2" class="form-label">Hora Final: </label>
+  <label for="formGroupExampleInput2" class="form-label">Hora final: </label>
   <input type="time" class="form-control" id="finTime" value="<%= evento[i].horaFin %>" name="finTime" name="finTime" required>
 </div>
-<div class="mb-3">
-  <label for="formGroupExampleInput2" class="form-label">Cupos: </label>
-  <input type="number" class="form-control" id="cupos" name="cupos" value="<%= evento[i].cupos %>" required>
-</div>
+<center>
 <button class="btn-save" type="submit">REGISTRO </button>
 <button 
   	class="btn-cancel"><a href="/list" class="btn-cancel">CANCELAR</a>
  </button>
-
+</center>
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 	<% if(typeof alert != "undefined") {%>
