@@ -6,11 +6,6 @@ const conexion_bd = {
 	database: "heroku_0124097ebb4b235",
 	password: "b2fe26fe"
 };
-const connection = mysql.createConnection({
-	host: process.env.DB_HOST,
-	user: process.env.DB_USER,
-	database: process.env.DB_DATABASE
-});
 
 function handleDisconnect(conexion_bd){
 	connection = mysql.createPool(conexion_bd);
@@ -33,5 +28,5 @@ function handleDisconnect(conexion_bd){
 	});
 }
 
-// handleDisconnect(conexion_bd);
-module.exports = connection;
+handleDisconnect(conexion_bd);
+module.exports = conexion_bd;

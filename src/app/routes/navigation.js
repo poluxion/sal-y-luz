@@ -101,8 +101,7 @@ module.exports = app => {
 		})
 	})
 	app.get("/contemos", (req,res)=>{
-		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Laboratorios de comunicaciones - CONTEMOS LA 13' ",
-		 (err,result)=>{
+		connection.query("SELECT * FROM evento WHERE nombreEvento = 'Laboratorios de comunicaciones - CONTEMOS LA 13'", (err,result) => {
 			res.render('../views/contemos.ejs', {
 				evento:result,
 				inicioSesion:true,
