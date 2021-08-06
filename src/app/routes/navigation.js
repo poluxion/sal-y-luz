@@ -106,9 +106,7 @@ module.exports = app => {
 			res.render('../views/contemos.ejs', {
 				evento:result,
 				inicioSesion:true,
-				rol_user: req.session.Rol,
-				cedula:req.session.Cedula,
-				eve:req.params.idEvento
+				rol_user: req.session.Rol
 			})
 		});
 	})
@@ -181,7 +179,6 @@ module.exports = app => {
 		let cedula = req.session.Cedula;
 		let asistencia = 0;
 		let nombreEvento = req.params.evento;
-		const {ced} = req.body;
 
 		if (cedula && idEvento) {
 			connection.query('SELECT * FROM asistencia WHERE cedula = ? AND idEvento = ?'
@@ -193,7 +190,7 @@ module.exports = app => {
 						rol_user:req.session.Rol,
 						alert:true,
 						alertTitle:"Error",
-						alertMessage:"Error al registrar al evento/Ya estas checkeado",
+						alertMessage:"Error al registrar al evento/Ya estas registrado",
 						alertIcon: "error",
 						showConfirmButton: true,
 						timer: 3000,
@@ -210,7 +207,6 @@ module.exports = app => {
 					res.render('../views/contemos.ejs',{
 					inicioSesion:true,
 					evento:resu,
-					cedula:req.session.Cedula,
 					rol_user:req.session.Rol,
 					alert:true,
 					alertTitle:"Error al registrar al evento",
@@ -224,7 +220,6 @@ module.exports = app => {
 						res.render('../views/contemos.ejs', {
 						inicioSesion:true,
 						evento:resu,
-						cedula:req.session.Cedula,
 						rol_user:req.session.Rol,
 						alert:true,
 						alertTitle:"Registration",
@@ -234,77 +229,12 @@ module.exports = app => {
 						timer:3000,
 						ruta:''
 						});
-				}
-			})
-		}
+					}
+				})
+			}
 		})
 	} 
 })
-
-			
-
-
-//////////
-
-/*	app.get("/registroEvento/:evento/:id", (req,res)=>{
-		let idEvento = req.params.id;
-		let cedula = req.session.Cedula;
-		let asistencia = 0;
-		connection.query("INSERT INTO asistencia SET ?",{
-			idEvento,
-			cedula,
-			asistencia
-		}, (error,result) => {
-			if(error){
-				res.render('../views/contemos.ejs',{
-					inicioSesion:false,
-					evento:result,
-					rol_user:req.session.Rol,
-					alert:true,
-					alertTitle:"Error al registrar al evento",
-					alertMessage :"Imposible registrar/Usuario repetido",
-					alertIcon :"error",
-					showConfirmButton:false,
-					timer:3000,
-					ruta:''
-				});
-			
-			} else if (cedula && idEvento) {
-				connection.query('SELECT * FROM asistencia WHERE cedula = ? AND idEvento = ?',[cedula,idEvento],(err,results)=> {
-					if (results.cedula === cedula && results.idEvento === idEvento) {
-						res.render('../views/contemos.ejs',{
-							inicioSesion:false,
-							evento:result,
-							rol_user:req.session.Rol,
-							alert:true,
-							alertTitle:"Error al registrar al evento",
-							alertMessage :"Imposible registrar/Usuario repetido",
-							alertIcon :"error",
-							showConfirmButton:false,
-							timer:3000,
-							ruta:''
-						});
-					}
-				})
-							
-					} else {
-				res.render('../views/contemos.ejs', {
-					inicioSesion:true,
-					evento:result,
-					rol_user:req.session.Rol,
-					alert:true,
-					alertTitle:"Registration",
-					alertMessage :"Successful Registration",
-					alertIcon :"success",
-					showConfirmButton:false,
-					timer:3000,
-					ruta:''
-				});
-			}
-		})
-	})
-	*/
-
 	app.get('/inicioSesion', (req,res)=> {
 		res.render('../views/inicioSesion.ejs');
 	})
