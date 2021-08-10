@@ -374,14 +374,15 @@ module.exports = app => {
 		})
 	})
 
-	app.post('/registroAsistencia', (req, res)=> {
-		const {cedula,idEvento,selEvento} = req.body;
+	app.post('/registroAsistencia', (req,res)=> {
+		const {cedula,idEvento} = req.body;
 		if (cedula && idEvento){
 			connection.query('SELECT * FROM asistencia WHERE cedula = ? AND idEvento = ?',[cedula,idEvento], (err,result) => {
-				if (result.cedula === cedula && result.idEvento === idEvento && result.asistencia === "1"){ 
+				if (result.length > 0 && result.idEvento === idEvento){ 
 					res.render('../views/asistencia.ejs', { 
 						inicioSesion:true,
 						asistente:result,
+						asist:req.params.asistencia,
 						rol_user:req.session.Rol,
 						alert:true,
 						alertTitle:"Error",
@@ -391,8 +392,22 @@ module.exports = app => {
 						timer: 3000,
 						ruta: 'asistencia'
 					});					
-				} else {
-						connection.query('UPDATE asistencia SET asistencia = 1 WHERE cedula = ? AND idEvento = ?',[cedula,idEvento], (err,results) => {
+				} else if (asist === "1") {
+					res.render('../views/asistencia.ejs', { 
+						inicioSesion:true,
+						asistente:result,
+						asist:req.params.asistencia,
+						rol_user:req.session.Rol,
+						alert:true,
+						alertTitle:"Error",
+						alertMessage:"Error al registrar al evento/Ya estas checkeado",
+						alertIcon: "error",
+						showConfirmButton: true,
+						timer: 3000,
+						ruta: 'asistencia'
+					});				
+			} else {
+				connection.query('UPDATE asistencia SET asistencia = 1 WHERE cedula = ? AND idEvento = ?',[cedula,idEvento], (err,results) => {
 						res.render('../views/asistencia.ejs', {
 						inicioSesion:true,
 						asistente:result,
@@ -405,7 +420,7 @@ module.exports = app => {
 						timer: 3000,
 						ruta: 'asistencia'
 					})
-				});			
+				});	
 			}
 		})	
 	}			
