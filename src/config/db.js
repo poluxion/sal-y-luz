@@ -1,17 +1,12 @@
 const mysql= require('mysql');
 
-/*const conexion_bd = {
+const conexion_bd = {
 	host:"us-cdbr-east-04.cleardb.com",
 	user:"b58be2487761ea",
 	database:"heroku_0124097ebb4b235",
 	password:"b2fe26fe"
-};*/
+};
 
-const connection = mysql.createConnection({
-	host: process.env.DB_HOST,
-	user: process.env.DB_USER,
-	database: process.env.DB_DATABASE
-});
 
 function handleDisconnect(conexion_bd) {
 	connection = mysql.createPool(conexion_bd);
@@ -33,22 +28,5 @@ function handleDisconnect(conexion_bd) {
 	});
 }
 
-//handleDisconnect(conexion_bd);
+handleDisconnect(conexion_bd);
 module.exports = connection;
-
-
-/*const connection = mysql.createConnection({
-	host: process.env.DB_HOST,
-	user: process.env.DB_USER,
-	database: process.env.DB_DATABASE
-});
-
-connection.connect((err)=>
-{
-	if (err) 
-	{
-		console.log("El error de conexion bd es: "+err)
-		return;
-	}
-	console.log("Conectado exitosamente a la BD");
-});*/
