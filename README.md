@@ -1,6 +1,4 @@
 Administrador: 
-Cédula: 1017172327
-Contraseña: 123456
 
 Asistente: 
 Cédula: 1234567
